@@ -1,10 +1,7 @@
 package BDDInterraction;
 
 
-import Repository.RoleRepository;
-import Repository.SiteRepository;
-import Repository.UtilisateursRepository;
-import domain.Utilisateurs;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -52,13 +49,14 @@ public class Remplissage {
     public Beans createUser(String[] data) {
         Beans utilisateurs = new Beans();
 
-        utilisateurs.setNom(data[0]);
-        utilisateurs.setPrenom(data[1]);
-        utilisateurs.setLogin(data[2]);
-        utilisateurs.setEquipeSofie(data[3]);
-        utilisateurs.setEquipe(data[4]);
-        utilisateurs.setMotDePasse(data[5]);
-        utilisateurs.setDerniereConnexion(LocalDate.parse(data[6], DateTimeFormatter.ISO_DATE));
+        utilisateurs.setIdBeans(Integer.parseInt(data[0]));
+        utilisateurs.setNom(data[1]);
+        utilisateurs.setPoidsUnit(Integer.parseInt(data[2]));
+        utilisateurs.setPrixUnit(Integer.parseInt(data[3]));
+        utilisateurs.setUnit(Integer.parseInt(data[4]));
+        utilisateurs.setScore(Integer.parseInt(data[5]));
+        utilisateurs.setTorrefaction(Integer.parseInt(data[6]));
+        utilisateurs.setOrigineId(Integer.parseInt(data[7]));
 
         return utilisateurs;
     }
