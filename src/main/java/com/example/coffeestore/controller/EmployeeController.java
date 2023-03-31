@@ -5,11 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.coffeestore.domain.Employee;
@@ -19,6 +15,12 @@ import com.example.coffeestore.service.EmployeeService;
 public class EmployeeController {
     @Autowired
     private EmployeeService service;
+    private final LoginBean loginBean;
+
+    public EmployeeController(LoginBean loginBean) {
+        this.loginBean = loginBean;
+    }
+
 
     @GetMapping("/")
     public String viewHomePage(Model model) {
@@ -48,6 +50,16 @@ public class EmployeeController {
         return mav;
 
     }
+
+    @RequestMapping(value = "/login/{id},{pwd}", method = RequestMethod.GET, produces = "application/json")
+    public @ResponseBody LoginBean loginService(@PathVariable String id, @PathVariable String pwd) {
+        //LoginBean loginBean = new LoginBean();
+
+        loginBean.setUserId(id);
+        loginBean.setPwd(pwd);
+        return loginBean;
+    }
+
     @RequestMapping("/delete/{id}")
     public String deleteEmployeePage(@PathVariable(name = "id") int id) {
         service.delete(id);
