@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.coffeestore.domain.Employee;
+import com.example.coffeestore.domain.beans;
 import com.example.coffeestore.service.EmployeeService;
 
 @Controller
@@ -24,20 +24,20 @@ public class EmployeeController {
 
     @GetMapping("/")
     public String viewHomePage(Model model) {
-        List<Employee> listemployee = service.listAll();
-        model.addAttribute("listemployee", listemployee);
+        List<beans> listebeans = service.listAll();
+        model.addAttribute("listebeans", listebeans);
         System.out.print("Get / ");
         return "index";
     }
 
     @GetMapping("/new")
     public String add(Model model) {
-        model.addAttribute("employee", new Employee());
+        model.addAttribute("employee", new beans());
         return "new";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveEmployee(@ModelAttribute("employee") Employee emp) {
+    public String saveEmployee(@ModelAttribute("employee") beans emp) {
         service.save(emp);
         return "redirect:/";
     }
@@ -45,7 +45,7 @@ public class EmployeeController {
     @RequestMapping("/edit/{id}")
     public ModelAndView showEditEmployeePage(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("new");
-        Employee emp = service.get(id);
+        beans emp = service.get(id);
         mav.addObject("employee", emp);
         return mav;
 

@@ -1,7 +1,7 @@
 package com.example.coffeestore.service;
 
-import com.example.coffeestore.domain.Employee;
-import com.example.coffeestore.repository.EmployeeRepository;
+import com.example.coffeestore.domain.beans;
+import com.example.coffeestore.repository.CoffeestoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,17 +11,17 @@ import java.util.List;
 public class EmployeeService {
 
     @Autowired
-    private EmployeeRepository repo;
+    private CoffeestoreRepository repo;
 
-    public List<Employee> listAll(){
+    public List<beans> listAll(){
         return repo.findAll();
     }
 
-    public void save(Employee std){
+    public void save(beans std){
         repo.save(std);
     }
 
-    public Employee get(long id){
+    public beans get(long id){
         return repo.findById(id).get();
     }
 
