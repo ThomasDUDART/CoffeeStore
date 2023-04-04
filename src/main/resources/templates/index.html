@@ -24,20 +24,21 @@
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
-                        <th>Employee ID</th>
-                        <th>Employee Name</th>
-                        <th>Mobile</th>
-                        <th>Salary</th>
+                        <th>Beans ID</th>
+                        <th>Beans Name</th>
+                        <th>Score</th>
+                        <th>Torrefaction</th>
                         <th>edit</th>
                         <th>delete</th>
                     </tr>
                     </thead>
                     <tbody>
+
                     <tr  th:each="beans : ${listebeans}">
-                        <td th:text="${beans.beansid}">Employee ID</td>
-                        <td th:text="${beans.Nom}">Employee Name</td>
-                        <td th:text="${beans.Score}">Mobile</td>
-                        <td th:text="${beans.Torrefaction}">Salary</td>
+                        <td th:text="${beans.beansid}">Beans ID</td>
+                        <td th:text="${beans.Nom}">Beans Name</td>
+                        <td th:text="${beans.Score}">Score</td>
+                        <td th:text="${beans.Torrefaction}">Torrefaction</td>
                         <td>
                             <a th:href="@{'/edit/' + ${beans.beansid}}">Edit</a>
                         </td>

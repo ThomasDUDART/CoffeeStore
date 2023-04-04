@@ -24,12 +24,15 @@ public class EmployeeController {
     }
 
 
+
     @GetMapping("/")
-    public String viewHomePage(Model model) {
+    public String viewHomePage(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         List<beans> listebeans = service.listAll();
+        System.out.println(listebeans.get(1));
         model.addAttribute("listebeans", listebeans);
-        System.out.print("Get / ");
-        return "Home.html";
+        //System.out.print("Get / ");
+        System.out.print(model.getAttribute("listebeans"));
+        return "index";
     }
 
     @GetMapping("/HomeSweetHome")
@@ -39,7 +42,6 @@ public class EmployeeController {
     }
 
     @GetMapping("/Maison")
-    @ResponseBody
     public String showHome(Model model) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("Home.html");
@@ -47,10 +49,9 @@ public class EmployeeController {
     }
 
     @GetMapping("/new")
-    @ResponseBody
     public String add(Model model) {
         model.addAttribute("beans", new beans());
-        return model.toString();
+        return "new";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
