@@ -62,6 +62,6 @@ public class beans {
 
     @Override
     public String toString() {
-        return "Employee [id=" + beansid + ", ename=" + Nom + ", mobile=" + Score + ", salary=" + Torrefaction + "]";
+        return "Café " + Nom + ",\n Score=" + Score + ",\n Torrefaction=" + Torrefaction;
     }
 }
