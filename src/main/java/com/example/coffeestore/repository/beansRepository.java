@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.example.coffeestore.domain.beans;
 
 @Repository
-public interface CoffeestoreRepository extends JpaRepository<beans, Long> {
+public interface beansRepository extends JpaRepository<beans, Long> {
 
 }

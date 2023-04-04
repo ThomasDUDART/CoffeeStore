@@ -1,22 +1,27 @@
 package com.example.coffeestore.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 @Entity
+@Table(name = "beans")
 public class beans {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int beansid;
 
+    @Column(name = "Nom")
     private String Nom;
-
+    @Column(name = "Score")
     private int Score;
-
+    @Column(name = "Torrefaction")
     private int Torrefaction;
+    @Column(name = "PoidsUnitaire")
+    private int poids;
+    @Column(name = "PrixUnitaire")
+    private int prix;
+
+
 
     public beans() {
     }
