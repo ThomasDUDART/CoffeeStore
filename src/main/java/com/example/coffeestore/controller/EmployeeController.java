@@ -1,20 +1,22 @@
 package com.example.coffeestore.controller;
 
-import java.util.List;
-
+import com.example.coffeestore.domain.beans;
+import com.example.coffeestore.service.CoffeesstoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.View;
 
-import com.example.coffeestore.domain.beans;
-import com.example.coffeestore.service.EmployeeService;
+import java.util.List;
+
 
 @Controller
 public class EmployeeController {
+
     @Autowired
-    private EmployeeService service;
+    private CoffeesstoreService service;
     private final LoginBean loginBean;
 
     public EmployeeController(LoginBean loginBean) {
@@ -27,13 +29,28 @@ public class EmployeeController {
         List<beans> listebeans = service.listAll();
         model.addAttribute("listebeans", listebeans);
         System.out.print("Get / ");
-        return "index";
+        return "Home.html";
+    }
+
+    @GetMapping("/HomeSweetHome")
+    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+        model.addAttribute("name", name);
+        return "Vitrine";
+    }
+
+    @GetMapping("/Maison")
+    @ResponseBody
+    public String showHome(Model model) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("Home.html");
+        return mav.toString();
     }
 
     @GetMapping("/new")
+    @ResponseBody
     public String add(Model model) {
-        model.addAttribute("employee", new beans());
-        return "new";
+        model.addAttribute("beans", new beans());
+        return model.toString();
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
