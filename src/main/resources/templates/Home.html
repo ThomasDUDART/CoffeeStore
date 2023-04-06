@@ -2,66 +2,110 @@
 <html>
 <head>
   <title>Vente de café</title>
+  <style>
+    .admin-button {
+      background-image: url('https://cdn.maxicoffee.com/images/cafe-de-specialite.svg');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+      width: 50px;
+      height: 50px;
+      border: none;
+      display: none;
+    }
+
+    .admin {
+      display: block;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #F7F4E8;
+      text-align: center;
+      padding: 20px;
+      border-bottom: 1px solid #DDD;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 36px;
+      color: #5C3A21;
+    }
+
+    section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    article {
+      width: 30%;
+      margin-bottom: 30px;
+      box-shadow: 0px 0px 10px #DDD;
+      padding: 10px;
+      text-align: center;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 24px;
+      margin-top: 0;
+      margin-bottom: 10px;
+      color: #5C3A21;
+    }
+
+    p {
+      margin: 0;
+      font-size: 16px;
+      color: #666;
+    }
+  </style>
 </head>
 <body>
 <header>
-  <h1>Bienvenue dans notre boutique en ligne de café</h1>
-  <nav>
-    <ul>
-      <li><a href="#accueil">Accueil</a></li>
-      <li><a href="#produits">Produits</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+  <h1>Vente de café</h1>
 </header>
 
-<main>
-  <section id="accueil">
-    <h2>Nos cafés</h2>
-    <p>Nous proposons une large sélection de cafés en grains, moulus ou en dosettes pour tous les goûts et toutes les envies.</p>
-    <p>Découvrez nos cafés d'origine, nos mélanges exclusifs et nos éditions limitées.</p>
-  </section>
+<section>
+  3 / 3
 
-  <section id="produits">
-    <h2>Nos produits</h2>
-    <ul>
-      <li>
-        <h3>Café en grains</h3>
-        <p>Nos cafés en grains sont sélectionnés parmi les meilleures variétés pour vous garantir un café d'exception.</p>
-        <p>Prix : à partir de 10€</p>
-      </li>
-      <li>
-        <h3>Café moulu</h3>
-        <p>Nos cafés moulus sont parfaits pour une utilisation quotidienne en cafetière filtre ou en expresso.</p>
-        <p>Prix : à partir de 8€</p>
-      </li>
-      <li>
-        <h3>Café en dosettes</h3>
-        <p>Nos dosettes compatibles avec les machines Nespresso® vous offrent une solution pratique et rapide pour déguster un café de qualité.</p>
-        <p>Prix : à partir de 4€</p>
-      </li>
-    </ul>
-  </section>
+  <button onclick="window.location.href='http://localhost:8080/shopBeans'" style="font-size: 2em; padding: 20px;">
+  <article>
+    <img src="https://www.terresdecafe.com/upload/tdc_zone2/1/tdc_img3.jpg" alt="Café en grains">
+    <h2>Café en grains</h2>
+    <p>Le café ça s'oxyde avec l'oxygène, la solution acheter des graisn frais. Découvrez notre sélection qui va vous régaler.</p>
+  </article>
+  </button>
 
-  <section id="contact">
-    <h2>Contactez-nous</h2>
-    <form action="mailto:vente-cafe@example.com" method="post">
-      <label for="nom">Nom :</label>
-      <input type="text" id="nom" name="nom" required>
-      <br>
-      <label for="email">Email :</label>
-      <input type="email" id="email" name="email" required>
-      <br>
-      <label for="message">Message :</label>
-      <textarea id="message" name="message" rows="5" cols="30" required></textarea>
-      <br>
-      <input type="submit" value="Envoyer">
-    </form>
-  </section>
-</main>
+  <article>
+    <img src="https://www.terresdecafe.com/upload/tdc_zone2/1/tdc_img2.jpg" alt="Café instantannée de spécialité">
+    <h2>Café moulu</h2>
+    <p>Ramené le café de spécialité à la maison, de l'eau chaude et un sachet suffise pour un café parfait.</p>
+  </article>
 
-<footer>
-  <p>&copy; 2023 Vente de café</p>
-</footer>
+  <article>
+    <img src="https://www.terresdecafe.com/upload/tdc_zone2/1/tdc_img1.jpg" alt="Café en capsules">
+    <h2>Café en capsules</h2>
+    <p>Pour les amateurs d'arômes complexe et délicat.</p>
+  </article>
+</section>
+<button id="myButton" class="admin-button admin"> </button>
+<script type="text/javascript">
+  document.getElementById("myButton").onclick = function () {
+    location.href = "http://localhost:8080/Admin";
+  };
+</script>
 </body>
 </html>

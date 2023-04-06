@@ -1,87 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Vente de café</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-
-    header {
-      background-color: #F7F4E8;
-      text-align: center;
-      padding: 20px;
-      border-bottom: 1px solid #DDD;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 36px;
-      color: #5C3A21;
-    }
-
-    section {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      padding: 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    article {
-      width: 30%;
-      margin-bottom: 30px;
-      box-shadow: 0px 0px 10px #DDD;
-      padding: 10px;
-      text-align: center;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      font-size: 24px;
-      margin-top: 0;
-      margin-bottom: 10px;
-      color: #5C3A21;
-    }
-
-    p {
-      margin: 0;
-      font-size: 16px;
-      color: #666;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>Rayon Café - Vente de grains de café</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
-  <h1>Vente de café</h1>
+  <nav>
+    <ul>
+      <li><a href="#">Accueil</a></li>
+      <li><a href="#">Notre histoire</a></li>
+      <li><a href="#">Rayons</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
 </header>
 
-<section>
-  <article>
-    <img src="cafe1.jpg" alt="Café en grains">
-    <h2>Café en grains</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae aliquet lectus. Suspendisse consectetur bibendum nunc, nec blandit nisl ultrices a. Donec feugiat, tellus in imperdiet ultrices, odio eros vulputate metus, vel tincidunt ipsum metus ac justo.</p>
-  </article>
+<main>
+  <h1>Rayon Café</h1>
+  <p>Découvrez notre sélection de grains de café :</p>
 
-  <article>
-    <img src="cafe2.jpg" alt="Café moulu">
-    <h2>Café moulu</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae aliquet lectus. Suspendisse consectetur bibendum nunc, nec blandit nisl ultrices a. Donec feugiat, tellus in imperdiet ultrices, odio eros vulputate metus, vel tincidunt ipsum metus ac justo.</p>
-  </article>
+  <div class="produits">
+    <div class="produit">
+      <img src="cafe1.jpg" alt="Café Arabica">
+      <h2>Café Arabica</h2>
+      <p class="description">Ce café 100% arabica est issu des meilleurs grains récoltés à la main dans les hauts plateaux de Colombie.</p>
+      <p class="prix">12,99€ / 250g</p>
+      <button>Ajouter au panier</button>
+    </div>
 
-  <article>
-    <img src="cafe3.jpg" alt="Café en capsules">
-    <h2>Café en capsules</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae aliquet lectus. Suspendisse consectetur bibendum nunc, nec blandit nisl ultrices a. Donec feugiat, tellus in imperdiet ultrices, odio eros vulputate metus, vel tincidunt ipsum metus ac justo.</p>
-  </article>
-</section>
+    <div class="produit">
+      <img src="cafe2.jpg" alt="Café Robusta">
+      <h2>Café Robusta</h2>
+      <p class="description">Le café robusta est un café plus corsé et plus fort en caféine que l'arabica. Il est idéal pour les amateurs de café fort.</p>
+      <p class="prix">9,99€ / 250g</p>
+      <button>Ajouter au panier</button>
+    </div>
+
+    <div class="produit">
+      <img src="cafe3.jpg" alt="Café décaféiné">
+      <h2>Café décaféiné</h2>
+      <p class="description">Notre café décaféiné est un mélange d'arabica et de robusta sans caféine. Il convient parfaitement aux personnes sensibles à la caféine.</p>
+      <p class="prix">14,99€ / 250g</p>
+      <button>Ajouter au panier</button>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2023 Vente de grains de café</p>
+</footer>
 </body>
 </html>

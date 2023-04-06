@@ -28,23 +28,15 @@
                         <th>Beans Name</th>
                         <th>Score</th>
                         <th>Torrefaction</th>
-                        <th>edit</th>
-                        <th>delete</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     <tr  th:each="beans : ${listebeans}">
-                        <td th:text="${beans.beansid}">Beans ID</td>
-                        <td th:text="${beans.Nom}">Beans Name</td>
-                        <td th:text="${beans.Score}">Score</td>
-                        <td th:text="${beans.Torrefaction}">Torrefaction</td>
-                        <td>
-                            <a th:href="@{'/edit/' + ${beans.beansid}}">Edit</a>
-                        </td>
-                        <td>
-                            <a th:href="@{'/delete/' + ${beans.beansid}}">Delete</a>
-                        </td>
+                        <td th:text="${beans.getId()}">Beans ID</td>
+                        <td th:text="${beans.getEname()}">Beans Name</td>
+                        <td th:text="${beans.getMobile()}">Score</td>
+                        <td th:text="${beans.getSalary()}">Torrefaction</td>
                     </tr>
 
                     </tbody>
