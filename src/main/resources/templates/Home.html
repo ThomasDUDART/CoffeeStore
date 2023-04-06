@@ -12,6 +12,8 @@
       height: 50px;
       border: none;
       display: none;
+      bottom: 20px;
+      left: 20px;
     }
 
     .admin {
@@ -71,6 +73,15 @@
       font-size: 16px;
       color: #666;
     }
+    button {
+      border: none;
+      background-color: white;
+      cursor: pointer;
+    }
+
+    button:focus {
+      outline: none;
+    }
   </style>
 </head>
 <body>
@@ -79,15 +90,15 @@
 </header>
 
 <section>
-  3 / 3
 
-  <button onclick="window.location.href='http://localhost:8080/shopBeans'" style="font-size: 2em; padding: 20px;">
   <article>
+  <button onclick="window.location.href='http://localhost:8080/shopBeans'">
     <img src="https://www.terresdecafe.com/upload/tdc_zone2/1/tdc_img3.jpg" alt="Café en grains">
     <h2>Café en grains</h2>
     <p>Le café ça s'oxyde avec l'oxygène, la solution acheter des graisn frais. Découvrez notre sélection qui va vous régaler.</p>
-  </article>
   </button>
+  </article>
+
 
   <article>
     <img src="https://www.terresdecafe.com/upload/tdc_zone2/1/tdc_img2.jpg" alt="Café instantannée de spécialité">
@@ -101,6 +112,7 @@
     <p>Pour les amateurs d'arômes complexe et délicat.</p>
   </article>
 </section>
+
 <button id="myButton" class="admin-button admin"> </button>
 <script type="text/javascript">
   document.getElementById("myButton").onclick = function () {

@@ -51,7 +51,8 @@ public class EmployeeController {
         List<beans> listebeans = service.listAll();
 
         model.addAttribute("listebeans", listebeans);
-        return"Vitrine";
+        return "Vitrine";
+    }
 
 
 
