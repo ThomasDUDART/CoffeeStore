@@ -1,11 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <title>Create New Product</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
-  <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
   <style>
     body {
       background-color: #F2E8D8;
@@ -15,6 +10,12 @@
       color: #4E342E;
       text-align: center;
       margin-top: 30px;
+      margin-bottom: 5px;
+    }
+    h2 {
+      color: #4E342E;
+      text-align: center;
+      margin-top: 0px;
     }
     form {
       border: 2px solid #4E342E;
@@ -59,7 +60,7 @@
     }
     th, td {
       text-align: left;
-      padding: 8px;
+      padding: 10px;
     }
     th {
       background-color: #4E342E;
@@ -92,21 +93,58 @@
     .admin:target .admin-button {
       display: block;
     }
+    .btn {
+      background-color: #4E342E;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      margin: 4px 2px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #5D4037;
+    }
+    .add-product {
+      background-color: #FFF3E0;
+      border: 2px solid #4E342E;
+      border-radius: 5px;
+      padding: 20px;
+      width: 60%;
+      margin: 30px auto;
+    }
+    .form-label {
+      font-weight: bold;
+    }
+    #add-product {
+      overflow: hidden;
+      transition: height 0.5s;
+      height: 0;
+    }
+    #add-product.active {
+      height: auto;
+    }
   </style>
+
+  <title>Gestion des stocks de grain de café</title>
 </head>
 <body>
-<div align="center">
-  <h1>Create New Product</h1>
-  <br />
-  <div class="col-sm-4">
-    <form action="#" th:action="@{/save}" th:object="${beans}" method="post">
+<h1>Gestion des stocks de grain de café</h1>
+<h2><button id="toggle-form" class="btn btn-primary">Ajouter un produit</button></h2>
+
+  <div class="admin" id="add-product">
+
+    <form action="#" th:action="@{/save}" th:object="${newBeans}" method="post">
 
 
       <div alight="left">
         <tr>
           <label class="form-label" >Beans Name</label>
           <td>
-            <input type="hidden" th:field="*{id}" />
             <input type="text" th:field="*{nom}" class="form-control" placeholder="grain Name" />
           </td>
         </tr>
@@ -155,5 +193,60 @@
     </form>
   </div>
 
+  <script>
+    const toggleFormButton = document.querySelector('#toggle-form');
+    const formContainer = document.querySelector('#add-product');
+
+    toggleFormButton.addEventListener('click', () => {
+      formContainer.classList.toggle('active');
+      if (formContainer.classList.contains('active')) {
+        formContainer.style.height = `${formContainer.scrollHeight}px`;
+      } else {
+        formContainer.style.height = '0';
+      }
+    });
+  </script>
+
+</div>
+<br><br>
+
+<h1>Liste des cafés en stock :</h1>
+<table>
+  <br><br>
+  <thead>
+  <tr>
+    <th>Beans ID</th>
+    <th>Beans Name</th>
+    <th>Poids Unitaire</th>
+    <th>Prix Unitaire</th>
+    <th>Unité</th>
+    <th>Score</th>
+    <th>Torrefaction</th>
+    <th>edit</th>
+    <th>delete</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr  th:each="beans : ${listebeans}">
+    <td th:text="${beans.getId()}">Beans ID</td>
+    <td th:text="${beans.getNom()}">Beans Name</td>
+
+    <td th:text="${beans.getPrixUnitaire}">Prix Unitaire</td>
+    <td th:text="${beans.getPoidsUnitaire()}">Poids unitaire</td>
+    <td th:text="${beans.getUnite()}">Unite</td>
+
+    <td th:text="${beans.getScore()}">Score</td>
+    <td th:text="${beans.getTorrefaction()}">Torrefaction</td>
+
+
+    <td>
+      <a th:href="@{'/edit/' + ${beans.getId()}}">Edit</a>
+    </td>
+    <td>
+      <a th:href="@{'/delete/' + ${beans.getId()}}">Delete</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
 </body>
 </html>

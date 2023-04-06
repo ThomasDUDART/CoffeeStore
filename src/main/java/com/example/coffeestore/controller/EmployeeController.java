@@ -14,6 +14,7 @@ import java.util.List;
 @Controller
 public class EmployeeController {
 
+
     @Autowired
     private CaffeService service;
     private final LoginBean loginBean;
@@ -23,47 +24,55 @@ public class EmployeeController {
     }
 
 
-    @GetMapping("/")
-    public String viewHomePage(Model model) {
+
+    @GetMapping("/Home")
+    public String viewHomePage(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         List<beans> listebeans = service.listAll();
         model.addAttribute("listebeans", listebeans);
-        System.out.print("Get / ");
-        return "Home.html";
+        return "index";
     }
 
-    @GetMapping("/HomeSweetHome")
+    @GetMapping("/Admin")
+    public String viewGestionPage(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+        List<beans> listebeans = service.listAll();
+        model.addAttribute("newBeans", new beans());
+        model.addAttribute("listebeans", listebeans);
+        return "GestionDesStock";
+    }
+
+    @GetMapping("/")
     public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         model.addAttribute("name", name);
+        return "Home";
+    }
+
+    @GetMapping("/shopBeans")
+    public String viewShopBeans(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+        List<beans> listebeans = service.listAll();
+
+        model.addAttribute("listebeans", listebeans);
         return "Vitrine";
-
     }
 
-    @GetMapping("/Maison")
-    @ResponseBody
-    public String showHome(Model model) {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("Home.html");
-        return mav.toString();
-    }
+
 
     @GetMapping("/new")
-    @ResponseBody
     public String add(Model model) {
         model.addAttribute("beans", new beans());
-        return model.toString();
+        return "new";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveEmployee(@ModelAttribute("employee") beans emp) {
-        service.save(emp);
+    public String saveEmployee(@ModelAttribute("beans") beans grain) {
+        service.save(grain);
         return "redirect:/";
     }
 
     @RequestMapping("/edit/{id}")
     public ModelAndView showEditEmployeePage(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("new");
-        beans emp = service.get(id);
-        mav.addObject("employee", emp);
+        beans grain = service.get(id);
+        mav.addObject("beans", grain);
         return mav;
 
     }
@@ -71,7 +80,6 @@ public class EmployeeController {
     @RequestMapping(value = "/login/{id},{pwd}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody LoginBean loginService(@PathVariable String id, @PathVariable String pwd) {
         //LoginBean loginBean = new LoginBean();
-
         loginBean.setUserId(id);
         loginBean.setPwd(pwd);
         return loginBean;
