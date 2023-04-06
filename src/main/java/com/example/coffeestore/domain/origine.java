@@ -1,20 +1,35 @@
 package com.example.coffeestore.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import javax.crypto.Mac;
 
 @Entity
 public class origine {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    @Column(name = "id")
     private int origineId;
 
+    @Column(name = "continent")
     private String continent;
+
+    @Column(name = "pays")
     private String pays;
+    @Column(name = "ferme")
     private String ferme;
+
+    public origine(int id, String continent, String Pays, String Ferme)
+    {
+        this.origineId = id;
+        this.continent = continent;
+        this.ferme = Ferme;
+    }
+
+    public origine() {
+
+    }
 
     public int getOrigineId() {
         return origineId;
