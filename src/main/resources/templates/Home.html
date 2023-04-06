@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Vente de café</title>
+  <title>La Roasterie</title>
   <style>
     .admin-button {
       background-image: url('https://cdn.maxicoffee.com/images/cafe-de-specialite.svg');
@@ -15,7 +15,12 @@
       bottom: 20px;
       left: 20px;
     }
-
+    h1 {
+      color: #4E342E;
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 5px;
+    }
     .admin {
       display: block;
     }
@@ -82,12 +87,46 @@
     button:focus {
       outline: none;
     }
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: transparent;
+      text-align: left;
+      padding: 10px;
+    }
+    .alert {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #764C28;
+      text-align: center;
+      color: white;
+      padding: 16px;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
 <header>
-  <h1>Vente de café</h1>
+  <h1>Bienvenue à la Roasterie</h1>
 </header>
+
+<main>
+
+
+  <section>
+    <h2>Notre histoire</h2>
+    <p>Nous sommes une petite entreprise passionnée de café. Depuis notre création notre objectif unique à toujours était de proposer du délicieux café pour tous les budgets.</p>
+  </section>
+  <section>
+    <h2>Notre torréfaction</h2>
+    <p>Nous torréfions tous nos cafés sur place. Nous sélectionnons avec soin les meilleurs grains, que nous torréfions selon des profils de torréfaction précis pour révéler toutes leurs qualités gustatives. Nous utilisons des machines de torréfaction de pointe pour assurer une torréfaction uniforme et homogène.</p>
+  </section>
+
+</main>
 
 <section>
 
@@ -95,29 +134,51 @@
   <button onclick="window.location.href='http://localhost:8080/shopBeans'">
     <img src="https://www.terresdecafe.com/upload/tdc_zone2/1/tdc_img3.jpg" alt="Café en grains">
     <h2>Café en grains</h2>
-    <p>Le café ça s'oxyde avec l'oxygène, la solution acheter des graisn frais. Découvrez notre sélection qui va vous régaler.</p>
+    <p>Le café ça s'oxyde avec l'oxygène, la solution acheter des grains frais. Découvrez notre sélection qui va vous régaler.</p>
   </button>
   </article>
 
 
   <article>
-    <img src="https://www.terresdecafe.com/upload/tdc_zone2/1/tdc_img2.jpg" alt="Café instantannée de spécialité">
-    <h2>Café moulu</h2>
+    <button onclick="alert('La Roasterie ne souhaite proposée que le meilleur et nous ne sommes acteuellement pas en mesure. Cette option est donc indisponible' )">
+    <img src="https://www.terresdecafe.com/upload/tdc_zone2/1/tdc_img2.jpg" alt="Café instantanné de spécialité">
+    <h2>Café instantanné</h2>
     <p>Ramené le café de spécialité à la maison, de l'eau chaude et un sachet suffise pour un café parfait.</p>
+    </button>
   </article>
 
   <article>
+    <button onclick="alert('La Roasterie ne souhaite proposée que le meilleur et nous ne sommes acteuellement pas en mesure. Cette option est donc indisponible' )">
     <img src="https://www.terresdecafe.com/upload/tdc_zone2/1/tdc_img1.jpg" alt="Café en capsules">
     <h2>Café en capsules</h2>
     <p>Pour les amateurs d'arômes complexe et délicat.</p>
+    </button>
   </article>
-</section>
 
+  <script>
+    // Ajout de la classe 'alert' pour afficher l'alerte stylisée
+    function alert(message) {
+      const alertBox = document.createElement('div');
+      alertBox.className = 'alert';
+      alertBox.textContent = message;
+      document.body.appendChild(alertBox);
+
+      // Suppression de l'alerte après 3 secondes
+      setTimeout(() => {
+        alertBox.remove();
+      }, 3000);
+    }
+  </script>
+
+</section>
+<footer>
+  <p>&copy; La Roasterie</p>
 <button id="myButton" class="admin-button admin"> </button>
 <script type="text/javascript">
   document.getElementById("myButton").onclick = function () {
     location.href = "http://localhost:8080/Admin";
   };
 </script>
+</footer>
 </body>
 </html>

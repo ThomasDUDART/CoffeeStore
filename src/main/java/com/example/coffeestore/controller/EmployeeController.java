@@ -49,9 +49,8 @@ public class EmployeeController {
     @GetMapping("/shopBeans")
     public String viewShopBeans(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
         List<beans> listebeans = service.listAll();
-
         model.addAttribute("listebeans", listebeans);
-        return "Vitrine";
+        return "ShopBeans";
     }
 
 
