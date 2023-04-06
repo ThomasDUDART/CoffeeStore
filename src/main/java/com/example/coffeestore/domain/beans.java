@@ -61,6 +61,10 @@ public class beans {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNom() {
         return Nom;
     }
@@ -116,6 +120,23 @@ public class beans {
     public void setOrigine(com.example.coffeestore.domain.origine origine) {
         this.origine = origine;
     }
+
+    public Set<note> getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Set<note> notes) {
+        this.notes = notes;
+    }
+    public void setNotes(note notes) {
+        this.notes.add(notes);
+    }
+    @Override
+    public String toString()
+    {
+        return Nom + "\n"+poids+"g, Score : "+Score+"/10, torréfaction : "+Torrefaction+"/100.\n"+qte+" unités en stock\n"+prix+"€";
+    }
+
 }
 
 

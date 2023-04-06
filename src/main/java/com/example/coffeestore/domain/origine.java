@@ -27,9 +27,7 @@ public class origine {
         this.ferme = Ferme;
     }
 
-    public origine() {
-
-    }
+    public origine() {}
 
     public int getOrigineId() {
         return origineId;
@@ -61,5 +59,10 @@ public class origine {
 
     public void setFerme(String ferme) {
         this.ferme = ferme;
+    }
+    @Override
+    public String toString()
+    {
+        return "Origine :"+pays+" au "+continent+". Ferme : "+ferme;
     }
 }

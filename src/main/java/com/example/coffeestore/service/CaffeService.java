@@ -8,13 +8,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CoffeesstoreService {
+public class CaffeService {
 
     @Autowired
     private beansRepository beanrepo;
-    private noteRepository noterepo;
-    private origineRepository originerepo;
-
 
     public List<beans> listAll(){
         return beanrepo.findAll();
