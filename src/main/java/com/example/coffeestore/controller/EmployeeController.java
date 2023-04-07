@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,6 +18,8 @@ public class EmployeeController {
 
     @Autowired
     private CoffeesstoreService service;
+    private List<beans> listebeansAvendre = null;
+    private List<beans> listeachat = new ArrayList<beans>();
     private final LoginBean loginBean;
 
     public EmployeeController(LoginBean loginBean) {
@@ -47,10 +50,33 @@ public class EmployeeController {
     }
 
     @GetMapping("/shopBeans")
-    public String viewShopBeans(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        List<beans> listebeans = service.listAll();
-        model.addAttribute("listebeans", listebeans);
+    public String viewShopBeans(Model model) {
+        listebeansAvendre = service.listAll();
+        model.addAttribute("listebeans", listebeansAvendre);
+        model.addAttribute("listeachat", listeachat);
         return "ShopBeans";
+    }
+
+    @GetMapping("/add/{id}")
+    public String addToCart(@PathVariable(name = "id") int id) {
+        if(!listeachat.contains(listebeansAvendre.get(id-2))){
+            listeachat.add(listebeansAvendre.get(id-2));
+            listeachat.get(listeachat.indexOf(listebeansAvendre.get(id-2))).setUnite(1);
+        }
+        else listeachat.get(listeachat.indexOf(listebeansAvendre.get(id-2))).setUnite(listeachat.get(listeachat.indexOf(listebeansAvendre.get(id-2))).getUnite()+1);
+
+        return "redirect:/shopBeans";
+    }
+
+    @GetMapping("/accueil")
+    public String backHome() {
+        return "redirect:/";
+    }
+
+    @GetMapping("/panier")
+    public String viewCart(Model model) {
+        model.addAttribute("listeachat", listeachat);
+        return "Panier";
     }
 
 

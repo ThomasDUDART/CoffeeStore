@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<style>/* Thème grain de café */
+body {
+  background-color: #e5d5b5;
+  font-family: 'Open Sans', sans-serif;
+  color: #4d3c26;
+}
+
+header {
+  background-color: #91725d;
+  color: #fff;
+  padding: 20px;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2em;
+  transition: color 0.2s ease-in-out;
+}
+
+nav a:hover {
+  color: #e5d5b5;
+}
+
+main {
+  margin: 20px;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table th,
+table td {
+  padding: 10px;
+  border: 1px solid #4d3c26;
+}
+
+.boutons {
+  background-color: #d59564;
+  display: inline-block;
+  text-align: center;
+  line-height: 30px;
+  vertical-align: middle;
+  margin-top: 5px;
+  width: 100px;
+  height: 30px;
+  border-radius: 10%;
+}
+
+.boutons:hover {
+  cursor: pointer;
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: transparent;
+  text-align: left;
+  padding: 10px;
+}
+</style>
+<head>
+  <meta charset="UTF-8">
+  <title>Mon panier | Mon site e-commerce</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <nav>
+    <ul>
+      <li><a href="accueil">Accueil</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <h1>Mon panier</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Produit</th>
+      <th>Prix unitaire</th>
+      <th>PoidsUnitaire</th>
+      <th>Quantité</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="beans : ${listeachat}">
+      <td th:text="${beans.getNom()}">Beans Name</td>
+      <td th:text="${beans.getPrixUnitaire}">Prix Unitaire</td>
+      <td th:text="${beans.getPoidsUnitaire()}">Poids unitaire</td>
+      <td th:text="${beans.getUnite()}">Unite</td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="3">Total :</td>
+      <td>34,90€</td>
+    </tr>
+    </tfoot>
+  </table>
+  <div class="boutons">Commander</div>
+</main>
+<footer>
+  <p>&copy; La Roasterie</p>
+</footer>
+</body>
+</html>

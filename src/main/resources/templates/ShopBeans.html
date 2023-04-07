@@ -65,8 +65,25 @@
     color: #764C28;
     margin-bottom: 20px;
   }
+  a {
+    display: inline-block;
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    background-color: #d59564;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+  }
 
-  .produit button {
+  a:hover {
+    background-color: #91725d;
+    color: white;
+  }
+
+
+  .produit button{
     background-color: #764C28;
     color: #FFFFFF;
     border: none;
@@ -197,14 +214,34 @@
     background-color: black; /* Couleur de la puce */
     border-radius: 50%;
   }
+  .a-panier{
+    position:fixed;
+    top:2%;
+    right: 2%;
+  }
+  .bouton-panier {
+    background-image: url(https://www.terresdecafe.com/themes/tdcafe/assets/css/384df4a364a01ae98d31b4338e64d76a.png);;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    background-color: #764C28;
+    border-radius: 15%;
+    width: 50px;
+    height: 50px;
+    border: none;
+  }
+  .bouton-panier:hover {
+    background-color: #d59564;
+  }
   </style>
   <meta charset="UTF-8">
   <title>Coin Café - Vente de grains de café</title>
 </head>
 <body>
 <header>
+  <a href="panier" class="a-panier bouton-panier"></a>
   <nav>
-      <p href="http://localhost:8080/">Accueil</p>
+    <p href="accueil">Accueil</p>
   </nav>
 </header>
 
@@ -221,7 +258,17 @@
         <li>Score : <td class="prix" th:text="${beans.getScore()}"></td>/100</li>
         <li>Torrefaction : <td th:text="${beans.getTorrefaction()}"></td>/10</li>
       </ul>
-      <button>Ajouter au panier</button>
+      <a th:href="@{'/add/' + ${beans.getId()}}">Ajouter au panier</a>
+    </div>
+
+    <div class="produit" th:each="beans : ${listeachat}">
+      <ul>
+        <li>Nom : <td th:text="${beans.getNom()}"></td></li>
+        <li>Prix : <td class="prix" th:text="${beans.getPrixUnitaire}"></td>€</li>
+        <li>Poids : <td class="prix" th:text="${beans.getPoidsUnitaire()}"></td>g</li>
+        <li>Score : <td class="prix" th:text="${beans.getScore()}"></td>/100</li>
+        <li>Torrefaction : <td th:text="${beans.getTorrefaction()}"></td>/10</li>
+      </ul>
     </div>
   </div>
 
