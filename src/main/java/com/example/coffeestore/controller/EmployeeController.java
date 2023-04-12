@@ -2,13 +2,19 @@ package com.example.coffeestore.controller;
 
 import com.example.coffeestore.domain.beans;
 import com.example.coffeestore.service.CoffeesstoreService;
+import jakarta.activation.FileTypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +55,12 @@ public class EmployeeController {
         return "Home";
     }
 
+    @RequestMapping(value = "/Picture/{id}")
+    public ResponseEntity<byte[]> getrealisateur(@PathVariable(name="id") String id) throws IOException {
+        File img = new File("src/main/resources/templates/Picture/"+id+".jpg");
+        return ResponseEntity.ok().contentType(MediaType.valueOf(FileTypeMap.getDefaultFileTypeMap().getContentType(img))).body(Files.readAllBytes(img.toPath()));
+    }
+
     @GetMapping("/shopBeans")
     public String viewShopBeans(Model model) {
         listebeansAvendre = service.listAll();
@@ -59,13 +71,78 @@ public class EmployeeController {
 
     @GetMapping("/add/{id}")
     public String addToCart(@PathVariable(name = "id") int id) {
-        if(!listeachat.contains(listebeansAvendre.get(id-2))){
+
+        boolean contiens = true;
+        int positionPanier = -1;
+
+        for (int i = 0;i<listeachat.size();i++){
+            if(listeachat.get(i).getNom().equals(listebeansAvendre.get(id-2).getNom())){
+                contiens = false;
+                positionPanier = i;
+            }
+        }
+
+        if(contiens){
             listeachat.add(listebeansAvendre.get(id-2));
             listeachat.get(listeachat.indexOf(listebeansAvendre.get(id-2))).setUnite(1);
         }
-        else listeachat.get(listeachat.indexOf(listebeansAvendre.get(id-2))).setUnite(listeachat.get(listeachat.indexOf(listebeansAvendre.get(id-2))).getUnite()+1);
+        else listeachat.get(positionPanier).setUnitePlusOne();
 
         return "redirect:/shopBeans";
+    }
+
+    @GetMapping("/addOne/{id}")
+    public String addOneToCart(@PathVariable(name = "id") int id) {
+        int posi = panierPosi(id);
+        listeachat.get(posi).setUnitePlusOne();
+        return "redirect:/panier";
+    }
+
+    @GetMapping("/removeOne/{id}")
+    public String removeOneToCart(@PathVariable(name = "id") int id) {
+
+        int posi = panierPosi(id);
+        listeachat.get(posi).setUniteMinusOne();
+
+        int tampon = listeachat.get(posi).getUnite();
+
+        if (tampon == 0){
+            listeachat.remove(posi);
+        }
+        return "redirect:/panier";
+
+    }
+
+    public int panierPosi(int id){
+        int positionPanier = -1;
+
+        for (int i = 0;i<listeachat.size();i++){
+            if(listeachat.get(i).getNom().equals(listebeansAvendre.get(id-2).getNom())){
+                positionPanier = i;
+            }
+        }
+        return positionPanier;
+    }
+
+    @GetMapping("/Buying")
+    public String majStockAchat() {
+
+
+        for (int i = 0; i<listebeansAvendre.size();i++){
+
+            boolean contiens = false;
+
+            int posi = panierPosi(i+2);
+            if (posi > -1) contiens = true;
+
+            if (contiens){
+                listebeansAvendre.get(i).setUnite(listebeansAvendre.get(i).getUnite() - listeachat.get(posi).getUnite());
+                System.out.println(listebeansAvendre.get(i).getUnite());
+                service.save(listebeansAvendre.get(i));
+            }
+        }
+
+        return "redirect:/panier";
     }
 
     @GetMapping("/accueil")

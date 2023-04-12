@@ -257,18 +257,9 @@
         <li>Poids : <td class="prix" th:text="${beans.getPoidsUnitaire()}"></td>g</li>
         <li>Score : <td class="prix" th:text="${beans.getScore()}"></td>/100</li>
         <li>Torrefaction : <td th:text="${beans.getTorrefaction()}"></td>/10</li>
+        <li>Quantité Max : <td th:text="${beans.getUnite()}"></td></li>
       </ul>
       <a th:href="@{'/add/' + ${beans.getId()}}">Ajouter au panier</a>
-    </div>
-
-    <div class="produit" th:each="beans : ${listeachat}">
-      <ul>
-        <li>Nom : <td th:text="${beans.getNom()}"></td></li>
-        <li>Prix : <td class="prix" th:text="${beans.getPrixUnitaire}"></td>€</li>
-        <li>Poids : <td class="prix" th:text="${beans.getPoidsUnitaire()}"></td>g</li>
-        <li>Score : <td class="prix" th:text="${beans.getScore()}"></td>/100</li>
-        <li>Torrefaction : <td th:text="${beans.getTorrefaction()}"></td>/10</li>
-      </ul>
     </div>
   </div>
 

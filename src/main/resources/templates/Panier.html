@@ -24,7 +24,7 @@ nav li {
   margin-right: 20px;
 }
 
-nav a {
+nav {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
@@ -32,7 +32,7 @@ nav a {
   transition: color 0.2s ease-in-out;
 }
 
-nav a:hover {
+nav:hover {
   color: #e5d5b5;
 }
 
@@ -80,6 +80,23 @@ footer {
   text-align: left;
   padding: 10px;
 }
+
+a {
+  display: inline-block;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.2em;
+  padding: 10px 20px;
+  background-color: #d59564;
+  border-radius: 5px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+a:hover {
+  background-color: #91725d;
+  color: white;
+}
 </style>
 <head>
   <meta charset="UTF-8">
@@ -103,6 +120,8 @@ footer {
       <th>Prix unitaire</th>
       <th>PoidsUnitaire</th>
       <th>Quantité</th>
+      <th>Ajouter</th>
+      <th>Supprimer</th>
     </tr>
     </thead>
     <tbody>
@@ -111,6 +130,8 @@ footer {
       <td th:text="${beans.getPrixUnitaire}">Prix Unitaire</td>
       <td th:text="${beans.getPoidsUnitaire()}">Poids unitaire</td>
       <td th:text="${beans.getUnite()}">Unite</td>
+      <td><a th:href="@{'/addOne/' + ${beans.getId()}}"> + </a></td>
+      <td><a th:href="@{'/removeOne/' + ${beans.getId()}}"> - </a></td>
     </tr>
     </tbody>
     <tfoot>
@@ -120,7 +141,7 @@ footer {
     </tr>
     </tfoot>
   </table>
-  <div class="boutons">Commander</div>
+  <div class="boutons"><a href="/Buying">Commander</a></div>
 </main>
 <footer>
   <p>&copy; La Roasterie</p>

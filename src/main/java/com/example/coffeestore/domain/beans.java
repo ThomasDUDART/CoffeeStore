@@ -85,4 +85,13 @@ public class beans {
     public void setUnite(int unite) {
         Unite = unite;
     }
+
+    public void setUnitePlusOne() {
+        Unite++;
+    }
+
+    public void setUniteMinusOne() {
+        Unite--;
+    }
+
 }
