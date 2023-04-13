@@ -67,10 +67,19 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveEmployee(@ModelAttribute("beans") beans grain, Model model) {
+    public String ModifierBean(@ModelAttribute("beans") beans grain, Model model) {
         beans b = service.get(grain.getId());
         grain.setOrigine(b.getOrigine());
         grain.setNotes(b.getNotes());
+        service.save(grain);
+        List<beans> listebeans = service.listAll();
+        model.addAttribute("newBeans", new beans());
+        model.addAttribute("listebeans", listebeans);
+        return "GestionDesStock";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String Save(@ModelAttribute("beans") beans grain, Model model) {
         service.save(grain);
         List<beans> listebeans = service.listAll();
         model.addAttribute("newBeans", new beans());
