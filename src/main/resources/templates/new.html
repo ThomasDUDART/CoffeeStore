@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8" />
-  <title>Create New Product</title>
+  <title>Modifier le produit</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
   <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
   <style>
@@ -96,15 +96,36 @@
 </head>
 <body>
 <div align="center">
-  <h1>Create New Product</h1>
+  <h1>Modifier le produit</h1>
   <br />
+  <div class="col-sm-4">
+    <form action="#" th:action="@{'/EditOrigine/'+${beans.getId()}}" method="post">
+
+
+      <div alight="left">
+        <tr>
+          <label class="form-label" >Origine</label>
+          <td>
+            <input type="hidden" th:field="*{id}" />
+             <td th:text="${beans.getOrigine().toString()}">Origine</td>
+          </td>
+        </tr>
+      </div>
+      <br>
+      <tr>
+        <td colspan="2"><button type="submit" class="btn btn-info">Modifier</button> </td>
+      </tr>
+
+    </form>
+  </div>
+  <div>&nbsp</div>
   <div class="col-sm-4">
     <form action="#" th:action="@{/save}" th:object="${beans}" method="post">
 
 
       <div alight="left">
         <tr>
-          <label class="form-label" >Beans Name</label>
+          <label class="form-label" >Nom du café</label>
           <td>
             <input type="hidden" th:field="*{id}" />
             <input type="text" th:field="*{nom}" class="form-control" placeholder="grain Name" />
@@ -131,29 +152,27 @@
       <div alight="left">
         <tr>
           <label class="form-label" >Prix</label>
-          <td><input type="text" th:field="*{prixUnitaire}" class="form-control" placeholder="prixunitaire" /></td>
+          <td><input type="text" th:field="*{prix}" class="form-control" placeholder="prixunitaire" /></td>
         </tr>
       </div>
       <div alight="left">
         <tr>
           <label class="form-label" >Poids</label>
-          <td><input type="text" th:field="*{poidsUnitaire}" class="form-control" placeholder="poidsunitaire" /></td>
+          <td><input type="text" th:field="*{poids}" class="form-control" placeholder="poidsunitaire" /></td>
         </tr>
       </div>
       <div alight="left">
         <tr>
           <label class="form-label" >Unite</label>
-          <td><input type="text" th:field="*{unite}" class="form-control" placeholder="unite" /></td>
+          <td><input type="text" th:field="*{qte}" class="form-control" placeholder="unite" /></td>
         </tr>
       </div>
-
       <br>
       <tr>
-        <td colspan="2"><button type="submit" class="btn btn-info">Save</button> </td>
+        <td colspan="2"><button type="submit" class="btn btn-info">Enregistrer</button> </td>
       </tr>
 
     </form>
   </div>
-
 </body>
 </html>

@@ -138,7 +138,7 @@
 
   <div class="admin" id="add-product">
 
-    <form action="#" th:action="@{/save}" th:object="${newBeans}" method="post">
+    <form action="#" th:action="@{/add}" th:object="${newBeans}" method="post">
 
 
       <div alight="left">
@@ -169,19 +169,19 @@
       <div alight="left">
         <tr>
           <label class="form-label" >Prix</label>
-          <td><input type="text" th:field="*{prixUnitaire}" class="form-control" placeholder="prixunitaire" /></td>
+          <td><input type="text" th:field="*{prix}" class="form-control" placeholder="prixunitaire" /></td>
         </tr>
       </div>
       <div alight="left">
         <tr>
           <label class="form-label" >Poids</label>
-          <td><input type="text" th:field="*{poidsUnitaire}" class="form-control" placeholder="poidsunitaire" /></td>
+          <td><input type="text" th:field="*{poids}" class="form-control" placeholder="poidsunitaire" /></td>
         </tr>
       </div>
       <div alight="left">
         <tr>
           <label class="form-label" >Unite</label>
-          <td><input type="text" th:field="*{unite}" class="form-control" placeholder="unite" /></td>
+          <td><input type="text" th:field="*{qte}" class="form-control" placeholder="unite" /></td>
         </tr>
       </div>
 
@@ -217,11 +217,13 @@
   <tr>
     <th>Beans ID</th>
     <th>Beans Name</th>
-    <th>Poids Unitaire</th>
-    <th>Prix Unitaire</th>
+    <th>Prix (€)</th>
+    <th>Poids (g)</th>
     <th>Unité</th>
     <th>Score</th>
     <th>Torrefaction</th>
+    <th>Origine</th>
+    <th>Notes</th>
     <th>edit</th>
     <th>delete</th>
   </tr>
@@ -231,13 +233,14 @@
     <td th:text="${beans.getId()}">Beans ID</td>
     <td th:text="${beans.getNom()}">Beans Name</td>
 
-    <td th:text="${beans.getPrixUnitaire}">Prix Unitaire</td>
-    <td th:text="${beans.getPoidsUnitaire()}">Poids unitaire</td>
-    <td th:text="${beans.getUnite()}">Unite</td>
+    <td th:text="${beans.getPrix()}">Prix Unitaire</td>
+    <td th:text="${beans.getPoids()}">Poids unitaire</td>
+    <td th:text="${beans.getQte()}">Unite</td>
 
     <td th:text="${beans.getScore()}">Score</td>
     <td th:text="${beans.getTorrefaction()}">Torrefaction</td>
-
+    <td th:text="${beans.getOrigine().toString()}">Origine</td>
+    <td th:text="${beans.getNotesToString()}">Notes</td>
 
     <td>
       <a th:href="@{'/edit/' + ${beans.getId()}}">Edit</a>
