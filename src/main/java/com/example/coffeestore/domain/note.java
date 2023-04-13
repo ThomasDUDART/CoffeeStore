@@ -8,6 +8,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import java.util.Set;
 
 @Entity
+@Table(name = "note")
 public class note {
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE)
@@ -18,7 +19,7 @@ public class note {
     private String note;
 
     // Relation infini-infini avec la table notebeans
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( name = "notebeans",
             joinColumns = @JoinColumn( name = "notes" ),
             inverseJoinColumns = @JoinColumn( name = "bean" ) )

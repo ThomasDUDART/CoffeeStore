@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      background-color: #F2E8D8;
+      font-family: 'Arial', sans-serif;
+    }
+    h1 {
+      color: #4E342E;
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 5px;
+    }
+    h2 {
+      color: #4E342E;
+      text-align: center;
+      margin-top: 0px;
+    }
+    form {
+      border: 2px solid #4E342E;
+      border-radius: 5px;
+      padding: 10px;
+      width: 50%;
+      margin: 0 auto;
+      background-color: #FFF3E0;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      color: #4E342E;
+    }
+    input[type=text], input[type=number], input[type=file] {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+    input[type=submit] {
+      background-color: #4E342E;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    input[type=submit]:hover {
+      background-color: #5D4037;
+    }
+    table {
+      border-collapse: collapse;
+      width: 80%;
+      margin: 0 auto;
+      margin-top: 30px;
+      border: 2px solid #4E342E;
+      background-color: #FFF3E0;
+    }
+    th, td {
+      text-align: left;
+      padding: 10px;
+    }
+    th {
+      background-color: #4E342E;
+      color: white;
+    }
+    tr:nth-child(even) {
+      background-color: #FFE0B2;
+    }
+    tr:hover {
+      background-color: #FFF9C4;
+    }
+    .admin-button {
+      background-color: #4E342E;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+      display: none;
+    }
+    .admin-button:hover {
+      background-color: #5D4037;
+    }
+    .admin {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+    }
+    .admin:target .admin-button {
+      display: block;
+    }
+    .btn {
+      background-color: #4E342E;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      margin: 4px 2px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background-color: #5D4037;
+    }
+    .add-product {
+      background-color: #FFF3E0;
+      border: 2px solid #4E342E;
+      border-radius: 5px;
+      padding: 20px;
+      width: 60%;
+      margin: 30px auto;
+    }
+    .form-label {
+      font-weight: bold;
+    }
+    #add-product {
+      overflow: hidden;
+      transition: height 0.5s;
+      height: 0;
+    }
+    #add-product.active {
+      height: auto;
+    }
+  </style>
+
+  <title>Gestion des stocks de grain de café</title>
+</head>
+<body>
+<h1>Origines</h1>
+<form>
+<table>
+  <br><br>
+  <thead>
+  <tr>
+    <th>Origine</th>
+    <th>Continent</th>
+    <th>Pays</th>
+    <th>Ferme</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr  th:each="origine : ${listeOrigine}">
+    <td>
+      <div>
+        <input type="radio" th:id="${origine.getOrigineId()}" name="origine" th:value="${origine.getOrigineId()}">
+      </div>
+    </td>
+    <td th:text="${origine.getContinent()}">Continent</td>
+
+    <td th:text="${origine.getPays()}">Pays</td>
+    <td th:text="${origine.getFerme()}">Poids unitaire</td>
+
+  </tr>
+  </tbody>
+</table>
+  <div>
+    <button type="submit">Enregistrer</button>
+  </div>
+</form>
+</body>
+</html>

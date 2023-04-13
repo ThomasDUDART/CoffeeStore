@@ -2,9 +2,9 @@ package com.example.coffeestore.domain;
 
 import jakarta.persistence.*;
 
-import javax.crypto.Mac;
 
 @Entity
+@Table(name = "origine")
 public class origine {
 
     @Id
@@ -63,6 +63,6 @@ public class origine {
     @Override
     public String toString()
     {
-        return "Origine :"+pays+" au "+continent+". Ferme : "+ferme;
+        return pays+" en "+continent+"\n Ferme : "+ferme;
     }
 }

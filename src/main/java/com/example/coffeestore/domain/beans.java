@@ -30,16 +30,16 @@ public class beans {
     @Column(name = "quantite")
     private int qte;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "origine", nullable = false)
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JsonIgnore
     private origine origine;
 
-    @ManyToMany
-    @JoinTable( name = "notebeans",
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "notebeans",
             joinColumns = @JoinColumn( name = "bean" ),
-            inverseJoinColumns = @JoinColumn( name = "notes" ) )
+            inverseJoinColumns = @JoinColumn( name = "notes" ))
     @OnDelete(action = OnDeleteAction.NO_ACTION)
     @JsonIgnore
     private Set<note> notes;
@@ -120,9 +120,15 @@ public class beans {
     public void setOrigine(com.example.coffeestore.domain.origine origine) {
         this.origine = origine;
     }
-
-    public Set<note> getNotes() {
+    public Set<note> getNotes()
+    {
         return notes;
+    }
+    public String getNotesToString() {
+        String str = "";
+        for(note n : notes)
+            str = str+n.toString()+", ";
+        return str;
     }
 
     public void setNotes(Set<note> notes) {

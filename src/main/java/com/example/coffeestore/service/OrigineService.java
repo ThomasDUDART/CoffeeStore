@@ -3,8 +3,9 @@ package com.example.coffeestore.service;
 import com.example.coffeestore.domain.beans;
 import com.example.coffeestore.domain.*;
 import com.example.coffeestore.repository.*;
-import org.jvnet.hk2.annotations.Service;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 

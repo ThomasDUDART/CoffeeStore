@@ -20,7 +20,6 @@ public class CaffeService {
     public void save(beans std){
         beanrepo.save(std);
     }
-
     public beans get(long id){
         return beanrepo.findById(id).get();
     }
