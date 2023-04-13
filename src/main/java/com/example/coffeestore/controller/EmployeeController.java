@@ -117,8 +117,11 @@ public class EmployeeController {
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteEmployeePage(@PathVariable(name = "id") int id) {
+    public String deleteEmployeePage(@PathVariable(name = "id") int id, Model model) {
         service.delete(id);
+        List<beans> listebeans = service.listAll();
+        model.addAttribute("newBeans", new beans());
+        model.addAttribute("listebeans", listebeans);
         return "GestionDesStock";
     }
 }
