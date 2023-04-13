@@ -136,76 +136,76 @@
 <h1>Gestion des stocks de grain de café</h1>
 <h2><button id="toggle-form" class="btn btn-primary">Ajouter un produit</button></h2>
 
-  <div class="admin" id="add-product">
+<div class="admin" id="add-product">
 
-    <form action="#" th:action="@{/add}" th:object="${newBeans}" method="post">
-
-
-      <div alight="left">
-        <tr>
-          <label class="form-label" >Beans Name</label>
-          <td>
-            <input type="text" th:field="*{nom}" class="form-control" placeholder="grain Name" />
-          </td>
-        </tr>
-      </div>
+  <form action="#" th:action="@{/add}" th:object="${newBeans}" method="post">
 
 
-      <div alight="left">
-        <tr>
-          <label class="form-label" >Score</label>
-
-          <td>
-            <input type="text" th:field="*{score}" class="form-control" placeholder="score" />
-          </td>
-        </tr>
-      </div>
-      <div alight="left">
-        <tr>
-          <label class="form-label" >Torrefaction</label>
-          <td><input type="text" th:field="*{torrefaction}" class="form-control" placeholder="torrefaction" /></td>
-        </tr>
-      </div>
-      <div alight="left">
-        <tr>
-          <label class="form-label" >Prix</label>
-          <td><input type="text" th:field="*{prix}" class="form-control" placeholder="prixunitaire" /></td>
-        </tr>
-      </div>
-      <div alight="left">
-        <tr>
-          <label class="form-label" >Poids</label>
-          <td><input type="text" th:field="*{poids}" class="form-control" placeholder="poidsunitaire" /></td>
-        </tr>
-      </div>
-      <div alight="left">
-        <tr>
-          <label class="form-label" >Unite</label>
-          <td><input type="text" th:field="*{qte}" class="form-control" placeholder="unite" /></td>
-        </tr>
-      </div>
-
-      <br>
+    <div alight="left">
       <tr>
-        <td colspan="2"><button type="submit" class="btn btn-info">Save</button> </td>
+        <label class="form-label" >Beans Name</label>
+        <td>
+          <input type="text" th:field="*{nom}" class="form-control" placeholder="grain Name" />
+        </td>
       </tr>
+    </div>
 
-    </form>
-  </div>
 
-  <script>
-    const toggleFormButton = document.querySelector('#toggle-form');
-    const formContainer = document.querySelector('#add-product');
+    <div alight="left">
+      <tr>
+        <label class="form-label" >Score</label>
 
-    toggleFormButton.addEventListener('click', () => {
-      formContainer.classList.toggle('active');
-      if (formContainer.classList.contains('active')) {
-        formContainer.style.height = `${formContainer.scrollHeight}px`;
-      } else {
-        formContainer.style.height = '0';
-      }
-    });
-  </script>
+        <td>
+          <input type="text" th:field="*{score}" class="form-control" placeholder="score" />
+        </td>
+      </tr>
+    </div>
+    <div alight="left">
+      <tr>
+        <label class="form-label" >Torrefaction</label>
+        <td><input type="text" th:field="*{torrefaction}" class="form-control" placeholder="torrefaction" /></td>
+      </tr>
+    </div>
+    <div alight="left">
+      <tr>
+        <label class="form-label" >Prix</label>
+        <td><input type="text" th:field="*{prix}" class="form-control" placeholder="prixunitaire" /></td>
+      </tr>
+    </div>
+    <div alight="left">
+      <tr>
+        <label class="form-label" >Poids</label>
+        <td><input type="text" th:field="*{poids}" class="form-control" placeholder="poidsunitaire" /></td>
+      </tr>
+    </div>
+    <div alight="left">
+      <tr>
+        <label class="form-label" >Unite</label>
+        <td><input type="text" th:field="*{qte}" class="form-control" placeholder="unite" /></td>
+      </tr>
+    </div>
+
+    <br>
+    <tr>
+      <td colspan="2"><button type="submit" class="btn btn-info">Save</button> </td>
+    </tr>
+
+  </form>
+</div>
+
+<script>
+  const toggleFormButton = document.querySelector('#toggle-form');
+  const formContainer = document.querySelector('#add-product');
+
+  toggleFormButton.addEventListener('click', () => {
+    formContainer.classList.toggle('active');
+    if (formContainer.classList.contains('active')) {
+      formContainer.style.height = `${formContainer.scrollHeight}px`;
+    } else {
+      formContainer.style.height = '0';
+    }
+  });
+</script>
 
 </div>
 <br><br>

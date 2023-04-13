@@ -77,7 +77,7 @@ public class Controller {
 
         if(contiens){
             listeachat.add(listebeansAvendre.get(id-2));
-            listeachat.get(listeachat.indexOf(listebeansAvendre.get(id-2))).setUnite(1);
+            listeachat.get(listeachat.indexOf(listebeansAvendre.get(id-2))).setQte(1);
         }
         else listeachat.get(positionPanier).setUnitePlusOne();
 
@@ -97,7 +97,7 @@ public class Controller {
         int posi = panierPosi(id);
         listeachat.get(posi).setUniteMinusOne();
 
-        int tampon = listeachat.get(posi).getUnite();
+        int tampon = listeachat.get(posi).getQte();
 
         if (tampon == 0){
             listeachat.remove(posi);
@@ -129,8 +129,7 @@ public class Controller {
             if (posi > -1) contiens = true;
 
             if (contiens){
-                listebeansAvendre.get(i).setUnite(listebeansAvendre.get(i).getUnite() - listeachat.get(posi).getUnite());
-                System.out.println(listebeansAvendre.get(i).getUnite());
+                listebeansAvendre.get(i).setQte(listebeansAvendre.get(i).getQte() - listeachat.get(posi).getQte());
                 service.save(listebeansAvendre.get(i));
             }
         }
