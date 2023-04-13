@@ -241,7 +241,7 @@
 <header>
   <a href="panier" class="a-panier bouton-panier"></a>
   <nav>
-    <p href="accueil">Accueil</p>
+    <a href="accueil">Accueil</a>
   </nav>
 </header>
 
@@ -250,7 +250,7 @@
   <p class="description">Découvrez notre sélection de grains de café :</p>
 
   <div class="produits">
-    <div class="produit" th:each="beans : ${listebeans}">
+    <div class="produit" th:each="beans, iter : ${listebeans}">
       <ul>
         <li>Nom : <td th:text="${beans.getNom()}"></td></li>
         <li>Prix : <td class="prix" th:text="${beans.getPrix}"></td>€</li>
@@ -261,7 +261,7 @@
         <li>Origine : <td th:text="${beans.getOrigine().toString()}"></td></li>
         <li>Note de dégustation : <td th:text="${beans.getNotesToString()}"></td></li>
       </ul>
-      <a th:href="@{'/add/' + ${beans.getId()}}">Ajouter au panier</a>
+      <a th:href="@{'/add/' + ${iter.count}}">Ajouter au panier</a>
     </div>
   </div>
 

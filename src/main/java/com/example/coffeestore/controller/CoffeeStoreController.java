@@ -1,8 +1,10 @@
 package com.example.coffeestore.controller;
 
 import com.example.coffeestore.domain.beans;
+import com.example.coffeestore.domain.note;
 import com.example.coffeestore.domain.origine;
 import com.example.coffeestore.service.CaffeService;
+import com.example.coffeestore.service.NoteService;
 import com.example.coffeestore.service.OrigineService;
 import jakarta.activation.FileTypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ public class CoffeeStoreController {
     private CaffeService service;
     @Autowired
     private OrigineService origineService;
+    @Autowired
+    private NoteService noteService;
     private List<beans> listebeansAvendre = null;
     private List<beans> listeachat = new ArrayList<beans>();
 
@@ -38,11 +42,16 @@ public class CoffeeStoreController {
     }
 
     @GetMapping("/Admin")
-    public String viewGestionPage(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+    public ModelAndView viewGestionPage(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+        ModelAndView mav = new ModelAndView("GestionDesStock");
+        List<origine> orig = origineService.listAll();
+        mav.addObject("listeOrigine", orig);
+        List<note> notNote = noteService.listAll();
+        mav.addObject("listeNotes", notNote);
         List<beans> listebeans = service.listAll();
         model.addAttribute("newBeans", new beans());
         model.addAttribute("listebeans", listebeans);
-        return "GestionDesStock";
+        return mav;
     }
 
     @GetMapping("/")
@@ -66,15 +75,15 @@ public class CoffeeStoreController {
         boolean contiens = true;
         int positionPanier = -1;
         for (int i = 0;i<listeachat.size();i++){
-            if(listeachat.get(i).getNom().equals(listebeansAvendre.get(id-2).getNom())){
+            if(listeachat.get(i).getNom().equals(listebeansAvendre.get(id-1).getNom())){
                 contiens = false;
                 positionPanier = i;
             }
         }
 
         if(contiens){
-            listeachat.add(listebeansAvendre.get(id-2));
-            listeachat.get(listeachat.indexOf(listebeansAvendre.get(id-2))).setQte(1);
+            listeachat.add(listebeansAvendre.get(id-1));
+            listeachat.get(listeachat.indexOf(listebeansAvendre.get(id-1))).setQte(1);
         }
         else listeachat.get(positionPanier).setUnitePlusOne();
 
@@ -83,15 +92,15 @@ public class CoffeeStoreController {
 
     @GetMapping("/addOne/{id}")
     public String addOneToCart(@PathVariable(name = "id") int id) {
-        int posi = panierPosi(id);
-        listeachat.get(posi).setUnitePlusOne();
+
+        listeachat.get(id-1).setUnitePlusOne();
         return "redirect:/panier";
     }
 
     @GetMapping("/removeOne/{id}")
     public String removeOneToCart(@PathVariable(name = "id") int id) {
 
-        int posi = panierPosi(id);
+        int posi = id-1;
         listeachat.get(posi).setUniteMinusOne();
 
         int tampon = listeachat.get(posi).getQte();
@@ -107,7 +116,7 @@ public class CoffeeStoreController {
         int positionPanier = -1;
 
         for (int i = 0;i<listeachat.size();i++){
-            if(listeachat.get(i).getNom().equals(listebeansAvendre.get(id-2).getNom())){
+            if(listeachat.get(i).getNom().equals(listebeansAvendre.get(id).getNom())){
                 positionPanier = i;
             }
         }
@@ -122,7 +131,7 @@ public class CoffeeStoreController {
 
             boolean contiens = false;
 
-            int posi = panierPosi(i+2);
+            int posi = panierPosi(i);
             if (posi > -1) contiens = true;
 
             if (contiens){
@@ -174,19 +183,13 @@ public class CoffeeStoreController {
         grain.setOrigine(b.getOrigine());
         grain.setNotes(b.getNotes());
         service.save(grain);
-        List<beans> listebeans = service.listAll();
-        model.addAttribute("newBeans", new beans());
-        model.addAttribute("listebeans", listebeans);
-        return "GestionDesStock";
+        return "redirect:/Admin";
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String Save(@ModelAttribute("beans") beans grain, Model model) {
         service.save(grain);
-        List<beans> listebeans = service.listAll();
-        model.addAttribute("newBeans", new beans());
-        model.addAttribute("listebeans", listebeans);
-        return "GestionDesStock";
+        return "redirect:/Admin";
     }
 
     @RequestMapping("/edit/{id}")
@@ -203,7 +206,6 @@ public class CoffeeStoreController {
         beans grain = service.get(id);
         List<origine> o = origineService.listAll();
         mav.addObject("beans", grain);
-        mav.addObject("listeOrigine", o);
         mav.addObject("origine", grain.getOrigine());
         return mav;
 
@@ -233,6 +235,6 @@ public class CoffeeStoreController {
         List<beans> listebeans = service.listAll();
         model.addAttribute("newBeans", new beans());
         model.addAttribute("listebeans", listebeans);
-        return "GestionDesStock";
+        return "redirect:/Admin";
     }
 }

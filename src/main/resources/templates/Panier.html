@@ -126,15 +126,15 @@ a:hover {
     </tr>
     </thead>
     <tbody>
-    <tr th:each="beans : ${listeachat}">
+    <tr th:each="beans, iter : ${listeachat}">
       <td th:text="${beans.getNom()}">Beans Name</td>
       <td th:text="${beans.getPrix} + '€'">Prix Unitaire</td>
       <td th:text="${beans.getPoids()} +'g'">Poids unitaire</td>
       <td th:text="${beans.getPrixTotal()} + '€'"></td>
       <td th:text="${beans.getPoidsTotal()} +'g'"></td>
       <td th:text="${beans.getQte()}">Unite</td>
-      <td><a th:href="@{'/addOne/' + ${beans.getId()}}"> + </a></td>
-      <td><a th:href="@{'/removeOne/' + ${beans.getId()}}"> - </a></td>
+      <td><a th:href="@{'/addOne/' + ${iter.count}}"> + </a></td>
+      <td><a th:href="@{'/removeOne/' + ${iter.count}}"> - </a></td>
     </tr>
     </tbody>
     <tfoot>

@@ -182,7 +182,6 @@
 
   <form action="#" th:action="@{/add}" th:object="${newBeans}" method="post">
 
-
     <div alight="left">
       <tr>
         <label class="form-label" >Beans Name</label>
@@ -223,7 +222,28 @@
     <div alight="left">
       <tr>
         <label class="form-label" >Unite</label>
-        <td><input type="text" th:field="*{qte}" class="form-control" placeholder="unite" /></td>
+        <td><input type="text" th:field="*{qte}" class="form-control" placeholder="qte" /></td>
+      </tr>
+    </div>
+
+    <div alight="left">
+      <tr>
+        <label class="form-label" >Origine</label>
+        <td>
+          <select name="origine" id="origine">
+            <option th:each="origine : ${listeOrigine}" th:value="${origine.getOrigineId()}" th:text="${origine.getPays() + ' (' + origine.getContinent() + ')'}" th:field="*{origine}"></option>
+          </select>
+        </td>
+      </tr>
+    </div>
+
+    <div alight="left">
+      <tr>
+        <label class="form-label" >Note</label>
+        <td th:each="note : ${listeNotes}">
+          <input type="checkbox" th:value="${note.getNoteId()}" th:text="${note.getNote()}" th:field="*{notes}">
+          <br>
+        </td>
       </tr>
     </div>
 

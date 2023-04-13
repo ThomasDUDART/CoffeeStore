@@ -12,7 +12,7 @@ import java.util.Set;
 @Table(name = "beans")
 public class beans {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private int id;
 
