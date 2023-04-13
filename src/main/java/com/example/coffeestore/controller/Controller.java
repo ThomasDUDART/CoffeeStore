@@ -1,7 +1,9 @@
 package com.example.coffeestore.controller;
 
 import com.example.coffeestore.domain.beans;
+import com.example.coffeestore.domain.origine;
 import com.example.coffeestore.service.CaffeService;
+import com.example.coffeestore.service.OrigineService;
 import jakarta.activation.FileTypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -22,10 +24,13 @@ public class Controller {
 
     @Autowired
     private CaffeService service;
+    @Autowired
+    private OrigineService origineService;
     private List<beans> listebeansAvendre = null;
     private List<beans> listeachat = new ArrayList<beans>();
 
     private final LoginBean loginBean;
+
 
     public Controller(LoginBean loginBean) {
         this.loginBean = loginBean;
@@ -167,6 +172,33 @@ public class Controller {
         return "redirect:/";
     }
 
+    @RequestMapping("/delete/{id}")
+    public String deleteEmployeePage(@PathVariable(name = "id") int id) {
+        service.delete(id);
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    public String ModifierBean(@ModelAttribute("beans") beans grain, Model model) {
+        beans b = service.get(grain.getId());
+        grain.setOrigine(b.getOrigine());
+        grain.setNotes(b.getNotes());
+        service.save(grain);
+        List<beans> listebeans = service.listAll();
+        model.addAttribute("newBeans", new beans());
+        model.addAttribute("listebeans", listebeans);
+        return "GestionDesStock";
+    }
+
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public String Save(@ModelAttribute("beans") beans grain, Model model) {
+        service.save(grain);
+        List<beans> listebeans = service.listAll();
+        model.addAttribute("newBeans", new beans());
+        model.addAttribute("listebeans", listebeans);
+        return "GestionDesStock";
+    }
+
     @RequestMapping("/edit/{id}")
     public ModelAndView showEditEmployeePage(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("new");
@@ -175,8 +207,29 @@ public class Controller {
         return mav;
 
     }
+    @RequestMapping("/EditOrigine/{id}")
+    public ModelAndView showEditOrigine(@PathVariable(name = "id") int id) {
+        ModelAndView mav = new ModelAndView("EditOrigine");
+        beans grain = service.get(id);
+        List<origine> o = origineService.listAll();
+        mav.addObject("beans", grain);
+        mav.addObject("listeOrigine", o);
+        mav.addObject("origine", grain.getOrigine());
+        return mav;
 
-    @RequestMapping(value = "/login/{id},{pwd}", method = RequestMethod.GET, produces = "application/json")//pas utiliser
+    }
+    @RequestMapping(value="/EditOrigine/{id}", params = "origine")
+    public ModelAndView SaveOrigineBean(@PathVariable(name = "id") int id, @RequestParam("origine") int origineId) {
+        beans grain = service.get(id);
+        grain.setOrigine(origineService.get(origineId));
+        service.save(grain);
+        ModelAndView mav = new ModelAndView("new");
+        mav.addObject("beans", grain);
+        return mav;
+
+    }
+
+    @RequestMapping(value = "/login/{id},{pwd}", method = RequestMethod.GET, produces = "application/json")
     public @ResponseBody LoginBean loginService(@PathVariable String id, @PathVariable String pwd) {
         //LoginBean loginBean = new LoginBean();
         loginBean.setUserId(id);
@@ -185,8 +238,11 @@ public class Controller {
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteEmployeePage(@PathVariable(name = "id") int id) {
+    public String deleteEmployeePage(@PathVariable(name = "id") int id, Model model) {
         service.delete(id);
-        return "redirect:/";
+        List<beans> listebeans = service.listAll();
+        model.addAttribute("newBeans", new beans());
+        model.addAttribute("listebeans", listebeans);
+        return "GestionDesStock";
     }
 }
