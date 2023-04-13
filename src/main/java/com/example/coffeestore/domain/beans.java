@@ -74,6 +74,7 @@ public class beans {
         return Poidsunitaire;
     }
 
+
     public void setPrixUnitaire(float prixunitaire) {
         Prixunitaire = prixunitaire;
     }
