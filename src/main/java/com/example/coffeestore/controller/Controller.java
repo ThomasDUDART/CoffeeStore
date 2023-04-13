@@ -1,25 +1,23 @@
 package com.example.coffeestore.controller;
 
 import com.example.coffeestore.domain.beans;
-import com.example.coffeestore.service.CoffeesstoreService;
+import com.example.coffeestore.service.CaffeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.View;
 
 import java.util.List;
 
 
-@Controller
-public class EmployeeController {
+@org.springframework.stereotype.Controller
+public class Controller {
 
     @Autowired
-    private CoffeesstoreService service;
+    private CaffeService service;
     private final LoginBean loginBean;
 
-    public EmployeeController(LoginBean loginBean) {
+    public Controller(LoginBean loginBean) {
         this.loginBean = loginBean;
     }
 
