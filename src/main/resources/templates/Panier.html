@@ -101,7 +101,6 @@ a:hover {
 <head>
   <meta charset="UTF-8">
   <title>Mon panier | Mon site e-commerce</title>
-  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
@@ -119,6 +118,8 @@ a:hover {
       <th>Produit</th>
       <th>Prix unitaire</th>
       <th>PoidsUnitaire</th>
+      <th>Prix</th>
+      <th>Poids</th>
       <th>Quantité</th>
       <th>Ajouter</th>
       <th>Supprimer</th>
@@ -127,17 +128,20 @@ a:hover {
     <tbody>
     <tr th:each="beans : ${listeachat}">
       <td th:text="${beans.getNom()}">Beans Name</td>
-      <td th:text="${beans.getPrixUnitaire}">Prix Unitaire</td>
-      <td th:text="${beans.getPoidsUnitaire()}">Poids unitaire</td>
-      <td th:text="${beans.getUnite()}">Unite</td>
+      <td th:text="${beans.getPrix} + '€'">Prix Unitaire</td>
+      <td th:text="${beans.getPoids()} +'g'">Poids unitaire</td>
+      <td th:text="${beans.getPrixTotal()} + '€'"></td>
+      <td th:text="${beans.getPoidsTotal()} +'g'"></td>
+      <td th:text="${beans.getQte()}">Unite</td>
       <td><a th:href="@{'/addOne/' + ${beans.getId()}}"> + </a></td>
       <td><a th:href="@{'/removeOne/' + ${beans.getId()}}"> - </a></td>
     </tr>
     </tbody>
     <tfoot>
     <tr>
-      <td colspan="3">Total :</td>
-      <td>34,90€</td>
+      <td colspan="2">Total :</td>
+      <td th:text="${poidsTotal} + 'g'"></td>
+      <td th:text="${prixTotal} + '€'"></td>
     </tr>
     </tfoot>
   </table>

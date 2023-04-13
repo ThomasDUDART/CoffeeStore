@@ -8,6 +8,7 @@ import jakarta.activation.FileTypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -19,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@org.springframework.stereotype.Controller
-public class Controller {
+@Controller
+public class CoffeeStoreController {
 
     @Autowired
     private CaffeService service;
@@ -32,17 +33,8 @@ public class Controller {
     private final LoginBean loginBean;
 
 
-    public Controller(LoginBean loginBean) {
+    public CoffeeStoreController(LoginBean loginBean) {
         this.loginBean = loginBean;
-    }
-
-
-
-    @GetMapping("/Home")
-    public String viewHomePage(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        List<beans> listebeans = service.listAll();
-        model.addAttribute("listebeans", listebeans);
-        return "index";
     }
 
     @GetMapping("/Admin")
@@ -60,19 +52,19 @@ public class Controller {
     }
 
     @GetMapping("/shopBeans")
-    public String viewShopBeans(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
-        List<beans> listebeans = service.listAll();
-
-        model.addAttribute("listebeans", listebeans);
-        return "Vitrine";
+    public String viewShopBeans(Model model) {
+        listebeansAvendre = service.listAll();
+        model.addAttribute("listebeans", listebeansAvendre);
+        model.addAttribute("listeachat", listeachat);
+        return "ShopBeans";
     }
+
 
     @GetMapping("/add/{id}")
     public String addToCart(@PathVariable(name = "id") int id) {
 
         boolean contiens = true;
         int positionPanier = -1;
-
         for (int i = 0;i<listeachat.size();i++){
             if(listeachat.get(i).getNom().equals(listebeansAvendre.get(id-2).getNom())){
                 contiens = false;
@@ -149,6 +141,16 @@ public class Controller {
 
     @GetMapping("/panier")
     public String viewCart(Model model) {
+        int poidsTotal = 0;
+        int prixTotal = 0;
+
+        for(int i = 0; i<listeachat.size();i++){
+            poidsTotal+=listeachat.get(i).getPoidsTotal();
+            prixTotal+=listeachat.get(i).getPrixTotal();
+        }
+
+        model.addAttribute("poidsTotal", poidsTotal);
+        model.addAttribute("prixTotal", prixTotal);
         model.addAttribute("listeachat", listeachat);
         return "Panier";
     }
@@ -164,18 +166,6 @@ public class Controller {
     public String add(Model model) {
         model.addAttribute("beans", new beans());
         return "new";
-    }
-
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String saveEmployee(@ModelAttribute("beans") beans grain) {
-        service.save(grain);
-        return "redirect:/";
-    }
-
-    @RequestMapping("/delete/{id}")
-    public String deleteEmployeePage(@PathVariable(name = "id") int id) {
-        service.delete(id);
-        return "redirect:/";
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)

@@ -152,4 +152,11 @@ public class beans {
         qte--;
     }
 
+    public int getPrixTotal(){
+        return prix*qte;
+    }
+    public int getPoidsTotal(){
+        return poids*qte;
+    }
+
 }

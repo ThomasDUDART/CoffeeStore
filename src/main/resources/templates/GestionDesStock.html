@@ -128,9 +128,51 @@
     #add-product.active {
       height: auto;
     }
-  </style>
+    nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
 
-  <title>Gestion des stocks de grain de café</title>
+    nav li {
+      display: inline-block;
+      margin-right: 20px;
+    }
+
+    nav {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2em;
+      transition: color 0.2s ease-in-out;
+    }
+
+    nav:hover {
+      color: #e5d5b5;
+    }
+    a {
+      display: inline-block;
+      color: black;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2em;
+      padding: 10px 20px;
+      background-color: #d59564;
+      border-radius: 5px;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    a:hover {
+      background-color: #91725d;
+      color: white;
+    }
+  </style>
+  <nav>
+    <ul>
+      <li><a href="accueil">Accueil</a></li>
+      <title>Gestion des stocks de grain de café</title>
+    </ul>
+  </nav>
 </head>
 <body>
 <h1>Gestion des stocks de grain de café</h1>

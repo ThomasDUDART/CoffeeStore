@@ -253,11 +253,13 @@
     <div class="produit" th:each="beans : ${listebeans}">
       <ul>
         <li>Nom : <td th:text="${beans.getNom()}"></td></li>
-        <li>Prix : <td class="prix" th:text="${beans.getPrixUnitaire}"></td>€</li>
-        <li>Poids : <td class="prix" th:text="${beans.getPoidsUnitaire()}"></td>g</li>
+        <li>Prix : <td class="prix" th:text="${beans.getPrix}"></td>€</li>
+        <li>Poids : <td class="prix" th:text="${beans.getPoids()}"></td>g</li>
         <li>Score : <td class="prix" th:text="${beans.getScore()}"></td>/100</li>
         <li>Torrefaction : <td th:text="${beans.getTorrefaction()}"></td>/10</li>
-        <li>Quantité Max : <td th:text="${beans.getUnite()}"></td></li>
+        <li>Quantité Max : <td th:text="${beans.getQte()}"></td></li>
+        <li>Origine : <td th:text="${beans.getOrigine().toString()}"></td></li>
+        <li>Note de dégustation : <td th:text="${beans.getNotesToString()}"></td></li>
       </ul>
       <a th:href="@{'/add/' + ${beans.getId()}}">Ajouter au panier</a>
     </div>
