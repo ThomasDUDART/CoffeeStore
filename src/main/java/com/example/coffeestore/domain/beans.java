@@ -87,6 +87,14 @@ public class beans {
         Unite = unite;
     }
 
+    public void setUnitePlusOne() {
+        Unite++;
+    }
+
+    public void setUniteMinusOne() {
+        Unite--;
+    }
+
     @Override
     public String toString() {
         return "beans [beansid=" + beansid + ", Poidsunitaire=" + Poidsunitaire + ", Prixunitaire=" + Prixunitaire + ", Unite=" + Unite + ", Nom=" + Nom + ", Score=" + Score + ", Torrefaction=" + Torrefaction + "]";
