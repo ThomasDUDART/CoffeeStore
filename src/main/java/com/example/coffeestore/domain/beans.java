@@ -16,6 +16,7 @@ public class beans {
     @Column(name = "id")
     private int id;
 
+
     @Column(name = "nom")
     private String Nom;
     @Column(name = "score")
