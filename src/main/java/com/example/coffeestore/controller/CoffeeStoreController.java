@@ -198,7 +198,6 @@ public class CoffeeStoreController {
         beans grain = service.get(id);
         mav.addObject("beans", grain);
         return mav;
-
     }
     @RequestMapping("/EditOrigine/{id}")
     public ModelAndView showEditOrigine(@PathVariable(name = "id") int id) {
