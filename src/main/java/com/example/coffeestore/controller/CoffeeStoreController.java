@@ -205,6 +205,7 @@ public class CoffeeStoreController {
         ModelAndView mav = new ModelAndView("EditOrigine");
         beans grain = service.get(id);
         List<origine> o = origineService.listAll();
+        mav.addObject("listeOrigine", o);
         mav.addObject("beans", grain);
         mav.addObject("origine", grain.getOrigine());
         return mav;
